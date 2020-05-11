@@ -1,0 +1,76 @@
+Type: AWS::EC2::VPC
+Properties:
+  CidrBlock: 10.0.0.0/16
+  InstanceTenancy: Default
+  Tags:
+    - Name: Demo-VPC
+
+Type: AWS::EC2::InternetGateway
+Properties:
+  Tags:
+    - Name: Demo-IG
+
+Type: AWS::EC2::VPCGatewayAttachment
+Properties:
+  InternetGatewayId:
+    Ref: InternetGateway
+  VpcId:
+    Ref: VPC
+
+Type: AWS::EC2::Subnet
+Properties:
+  AvailabilityZone: us-east-1a
+  CidrBlock: 10.0.1.0/24
+  MapPublicIpOnLaunch: True
+  Tags:
+    - Name: demo-public-subnet-1
+  VpcId: !Ref VPC
+#todo demo-public-subnet-2 | 10.0.2.0/24 | us-east-1b
+#todo demo-private-subnet-3 | 10.0.3.0/24 | us-east-1a
+#todo demo-private-subnet-4 | 10.0.4.0/24 | us-east-1b
+
+Type: AWS::EC2::RouteTable
+Properties:
+  Tags:
+    - Name: demo-private-RT
+  VpcId: !Ref VPC
+Type: AWS::EC2::RouteTable
+Properties:
+  Tags:
+    - Name: demo-public-RT
+  VpcId: !Ref VPC
+
+Type: AWS::EC2::Route
+Properties:
+  DestinationCidrBlock: String
+  DestinationIpv6CidrBlock: String
+  EgressOnlyInternetGatewayId: String
+  GatewayId: String
+  InstanceId: String
+  NatGatewayId: String
+  NetworkInterfaceId: String
+  RouteTableId: String
+  TransitGatewayId: String
+  VpcPeeringConnectionId: String
+
+Type: AWS::EC2::NatGateway
+Properties:
+  AllocationId: String
+  SubnetId: String #todo demo-public-subnet-2
+  Tags:
+    - Name: pub2-NG
+
+Type: AWS::EC2::EIP
+Properties:
+  Domain: String
+  InstanceId: String
+  PublicIpv4Pool: String
+  Tags:
+    - Tag
+Type: AWS::EC2::EIPAssociation
+Properties:
+  AllocationId: String
+  EIP: String
+  InstanceId: String
+  NetworkInterfaceId: String
+  PrivateIpAddress: String
