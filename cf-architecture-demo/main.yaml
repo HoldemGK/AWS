@@ -74,3 +74,36 @@ Properties:
   InstanceId: String
   NetworkInterfaceId: String
   PrivateIpAddress: String
+
+Type: AWS::ElasticLoadBalancing::LoadBalancer
+Properties:
+  AccessLoggingPolicy:
+    AccessLoggingPolicy
+  AppCookieStickinessPolicy:
+    - AppCookieStickinessPolicy
+  AvailabilityZones:
+    - String
+  ConnectionDrainingPolicy:
+    ConnectionDrainingPolicy
+  ConnectionSettings:
+    ConnectionSettings
+  CrossZone: Boolean
+  HealthCheck:
+    HealthCheck
+  Instances:
+    - String
+  LBCookieStickinessPolicy:
+    - LBCookieStickinessPolicy
+  Listeners:
+    - Listeners
+  LoadBalancerName: String
+  Policies:
+    - Policies
+  Scheme: internet-facing
+  SecurityGroups:
+    - String
+  Subnets:
+    - String
+  Tags:
+    - Name: Demo-ELB
+#todo Demo-internal-ELB
