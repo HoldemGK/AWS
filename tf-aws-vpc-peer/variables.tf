@@ -12,3 +12,15 @@ variable "region" {
   description = "Region for VPC"
   default = "us-east-1"
 }
+
+variable "ami-west" {
+  default = "ami-0e34e7b9ca0ace12d"
+}
+
+variable "ami-east" {
+  default = "ami-09d95fab7fff3776c"
+}
+
+variable "instance_type" {
+  default = "t2.micro"
+}
