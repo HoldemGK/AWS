@@ -1,5 +1,5 @@
 resource "aws_instance" "foo_inst" {
-  ami = var.ami-west
+  ami = var.ami-east
   instance_type = var.instance_type
   subnet_id = aws_subnet.foo_sub.id
 }
