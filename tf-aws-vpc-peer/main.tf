@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_vpc" "foo" {
-  provider   = "aws.us-west-2"
+  region = var.region_west
   cidr_block = "11.0.0.0/16"
 
   tags = {
@@ -21,7 +21,7 @@ resource "aws_subnet" "foo_sub" {
 }
 
 resource "aws_vpc" "bar" {
-  provider   = "aws.us-east-1"
+  region = var.region
   cidr_block = "12.0.0.0/16"
 
   tags = {
