@@ -13,10 +13,6 @@ variable "region" {
   default = "us-east-1"
 }
 
-variable "region_west" {
-  default = "us-west-2"
-}
-
 variable "ami-west" {
   default = "ami-0e34e7b9ca0ace12d"
 }
