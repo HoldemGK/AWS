@@ -11,7 +11,6 @@ resource "aws_vpc" "bar" {
 }
 
 resource "aws_vpc" "foo" {
-  provider   = "aws.us-west-2"
   cidr_block = "11.0.0.0/16"
 
   tags = {
