@@ -16,3 +16,4 @@ variable "region" {
 variable "ami-east" {
   default = "ami-09d95fab7fff3776c"
 }
+mofjKF1YWUEYd5qQi3n+N1YKLXLFFU53GBt3zImW
