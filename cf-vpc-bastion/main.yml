@@ -73,3 +73,20 @@ Parameters:
 -
 Resources:
 #============== VPC =================
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties: # Attach Primary CIDR Block
+      CidrBlock: !Ref VPCBlock
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: !Ref Environment
+-
+  VPCCidrBlock2: # Attach Secondary CIDR Block
+    Type: "AWS::EC2::VPCCidrBlock"
+    DependsOn: VPC
+    DeletionPolicy: Delete
+    Properties:
+      CidrBlock: !Ref VPCBlock2
+      VpcId: !Ref VPC
