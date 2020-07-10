@@ -1,0 +1,21 @@
+#------------------------------------------------------------------------------
+# CloudFormation Network Layer: VPC, Subnets + RouteTables, Internet + NAT Gate
+# Version   Date
+# 1.0       10.07.2020
+#------------------------------------------------------------------------------
+AWSTemplateFormatVersion: 2010-09-09
+Description: "Network: VPC, Subnets + RouteTables, Internet + NAT Gateways"
+
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      -
+        Label:
+          default: "Network Configuration"
+        Parameters:
+          - Environment
+          - VPCBlock
+          - VPCBlock2
+      -
+        Label:
+          default: "Subnets CIDR Blocks"
