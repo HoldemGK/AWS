@@ -105,3 +105,13 @@ Resources:
     Properties:
       VpcId: !Ref VPC
       InternetGatewayId: !Ref GatewayInternet
+
+-
+#============== Public RouteTables =================
+  RouteTableForPublicSubnet: # Creation of Route Table
+    Type: "AWS::EC2::RouteTable"
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Join [ " ", [ !Ref Environment, "PublicRouteTable" ] ]
