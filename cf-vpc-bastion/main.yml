@@ -115,3 +115,34 @@ Resources:
       Tags:
         - Key: Name
           Value: !Join [ " ", [ !Ref Environment, "PublicRouteTable" ] ]
+
+-
+  RoutesForPublicRouteTable: #Creation and Attachment of Routes
+    Type: "AWS::EC2::Route"
+    DependsOn: GatewayAttachmentInternet
+    Properties:
+      DescriptionCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref GatewayInternet
+      RouteTableId: !Ref RouteTableForPublicSubnet
+
+-
+#============== Private RouteTables =================
+  RouteTableForPrivateSubnetA:
+    Type: "AWS::EC2::RouteTable"
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Join [ " ", [ !Ref Environment, "PrivateRouteTableA" ] ]
+-
+  RouteTableForPrivateSubnetB:
+    Type: "AWS::EC2::RouteTable"
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Join [ " ", [ !Ref Environment, "PrivateRouteTableB" ] ]
+
+-
+#============== Routes for Private Subnet NAT =================
+  RoutesForPrivateRouteTableA:
