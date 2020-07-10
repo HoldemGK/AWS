@@ -90,3 +90,18 @@ Resources:
     Properties:
       CidrBlock: !Ref VPCBlock2
       VpcId: !Ref VPC
+
+-
+#============== Internet Gateway =================
+  GatewayInternet:
+    Type: "AWS::EC2::InternetGateway"
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Ref Environment
+-
+  GatewayAttachmentInternet: # Attachment IGW to VPC
+    Type: "AWS::EC2::VPCGatewayAttachment"
+    Properties:
+      VpcId: !Ref VPC
+      InternetGatewayId: !Ref GatewayInternet
