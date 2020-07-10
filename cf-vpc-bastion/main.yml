@@ -19,3 +19,33 @@ Metadata:
       -
         Label:
           default: "Subnets CIDR Blocks"
+        Parameters:
+          - PublicSubnetACIDR
+          - PublicSubnetBCIDR
+          - PrivateSubnetACIDR
+          - PrivateSubnetBCIDR
+          - DatabaseSubnetACIDR
+          - DatabaseSubnetBCIDR
+
+Parameters:
+  Environment:
+    Type: String
+    Default: "Prod"
+-
+  VPCBlock:
+    Type: String
+    Default: '10.0.0.0/16'
+-
+  VPCBlock2:
+    Type: String
+    Default: '192.0.0.0/16'
+-
+  PublicSubnetACIDR:
+    Type: String
+    Default: '10.0.10.0/24'
+    Description: "Public Subnet-A CIDR"
+-
+  PublicSubnetBCIDR:
+    Type: String
+    Default: '10.0.20.0/24'
+    Description: "Public Subnet-B CIDR"
