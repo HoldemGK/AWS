@@ -163,3 +163,32 @@ Resources:
 
 -
 #============== Associate Public Subnet =================
+  RouteAssociationPublicA:
+    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Properties:
+      RouteTableId: !Ref RouteTableForPublicSubnet
+      SubnetId: !Ref PublicSubnetA
+-
+  RouteAssociationPublicB:
+    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Properties:
+      RouteTableId: !Ref RouteTableForPublicSubnet
+      SubnetId: !Ref PublicSubnetB
+
+-
+#============== Associate Private Subnet =================
+  RouteAssociationPrivateA:
+    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Properties:
+      RouteTableId: !Ref RouteTableForPrivateSubnetA
+      SubnetId: !Ref PrivateSubnetA
+-
+  RouteAssociationPrivateB:
+    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Properties:
+      RouteTableId: !Ref RouteTableForPrivateSubnetB
+      SubnetId: !Ref PrivateSubnetB
+
+-
+#============== Associate Route Database =================
+  
