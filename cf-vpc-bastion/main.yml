@@ -210,3 +210,22 @@ Resources:
     Properties:
       RouteTableId: !Ref RouteTableForDatabase
       SubnetId: !Ref DatabaseSubnetB
+
+-
+#============== ElasticIP for NAT Gateway =================
+  EIP1:
+    Type: "AWS::EC2::EIP"
+    DependsOn: GatewayAttachmentInternet
+    Properties:
+      Domain: !Ref VPC
+-
+  EIP2:
+    Type: "AWS::EC2::EIP"
+    DependsOn: GatewayAttachmentInternet
+    Properties:
+      Domain: !Ref VPC
+-
+#============== NAT Gateway =================
+  NATGatewayA:
+    DependsOn: GatewayAttachmentInternet
+    Type: "AWS::EC2::NATGateway"
