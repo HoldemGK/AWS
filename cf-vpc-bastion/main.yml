@@ -121,7 +121,7 @@ Resources:
     Type: "AWS::EC2::Route"
     DependsOn: GatewayAttachmentInternet
     Properties:
-      DescriptionCidrBlock: 0.0.0.0/0
+      DestinationCidrBlock: 0.0.0.0/0
       GatewayId: !Ref GatewayInternet
       RouteTableId: !Ref RouteTableForPublicSubnet
 
@@ -146,3 +146,20 @@ Resources:
 -
 #============== Routes for Private Subnet NAT =================
   RoutesForPrivateRouteTableA:
+    Type: "AWS::EC2::Route"
+    DependsOn: NATGatewayA
+    Properties:
+      DestinationCidrBlock: 0.0.0.0/0
+      RouteTableId: !Ref RouteTableForPrivateSubnetA
+      NatGatewayId: !Ref NATGatewayA
+-
+  RoutesForPrivateRouteTableB:
+    Type: "AWS::EC2::Route"
+    DependsOn: NATGatewayB
+    Properties:
+      DestinationCidrBlock: 0.0.0.0/0
+      RouteTableId: !Ref RouteTableForPrivateSubnetB
+      NatGatewayId: !Ref NATGatewayB
+
+-
+#============== Associate Public Subnet =================
