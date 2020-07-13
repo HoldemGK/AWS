@@ -224,8 +224,27 @@ Resources:
     DependsOn: GatewayAttachmentInternet
     Properties:
       Domain: !Ref VPC
+      
 -
 #============== NAT Gateway =================
   NATGatewayA:
     DependsOn: GatewayAttachmentInternet
     Type: "AWS::EC2::NATGateway"
+    Properties:
+      SubnetId: !Ref PublicSubnetA
+      AllocationId: !GetAtt EIP1.AllocationId
+      Tags:
+        - Key: Name
+          Value: NAT-A
+-
+  NATGatewayB:
+    DependsOn: GatewayAttachmentInternet
+    Type: "AWS::EC2::NATGateway"
+    Properties:
+      SubnetId: !Ref PublicSubnetB
+      AllocationId: !GetAtt EIP2.AllocationId
+      Tags:
+        - Key: Name
+          Value: NAT-B
+
+-
