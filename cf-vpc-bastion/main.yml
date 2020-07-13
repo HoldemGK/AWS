@@ -314,5 +314,49 @@ Resources:
       Tags:
         - Key: Name
           Value: !Join [ "", [ !Ref Environment, "-Database-B" ] ]
-          
+
+-
+#============== Ouyputs =================
+Ouyputs:
+  VPC:
+    Description: ID for the VPC
+    Value: !Ref VPC
+    Export:
+      Name: !Join [ "-", [ !Ref "Environment", "VPC" ] ]
+-
+  VPCBlock1:
+    Description: Primary CIDR block for the VPC
+    Value: !GetAtt VPC.CidrBlock
+    Export:
+      Name: !Join [ "-", [ !Ref "Environment", "CIDR1" ] ]
+-
+  VPCBlock2:
+    Description: Secondary CIDR block for the VPC
+    Value: !Ref VPCBlock2
+    Export:
+      Name: !Join [ "-", [ !Ref "Environment", "CIDR2" ] ]
+-
+  PublicA:
+    Description: ID for Public Subnet A
+    Value: !Ref PublicSubnetA
+    Export:
+      Name: !Join [ "-", [ !Ref "Environment", "PublicSubnetA" ] ]
+-
+  PublicB:
+    Description: ID for Public Subnet B
+    Value: !Ref PublicSubnetB
+    Export:
+      Name: !Join [ "-", [ !Ref "Environment", "PublicSubnetB" ] ]
+-
+  DatabaseA:
+    Description: ID for Database Subnet A
+    Value: !Ref DatabaseSubnetA
+    Export:
+      Name: !Join [ "-", [ !Ref "Environment", "DatabaseSubnetA" ] ]
+-
+  DatabaseB:
+    Description: ID for Database Subnet B
+    Value: !Ref DatabaseSubnetB
+    Export:
+      Name: !Join [ "-", [ !Ref "Environment", "DatabaseSubnetB" ] ]
 -
