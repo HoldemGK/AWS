@@ -224,7 +224,7 @@ Resources:
     DependsOn: GatewayAttachmentInternet
     Properties:
       Domain: !Ref VPC
-      
+
 -
 #============== NAT Gateway =================
   NATGatewayA:
@@ -247,4 +247,72 @@ Resources:
         - Key: Name
           Value: NAT-B
 
+-
+#============== All Subnets =================
+  PublicSubnetA:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 0, "Fn::GetAZs": { Ref: "AWS::Region" } ]
+      CidrBlock: !Ref "PublicSubnetACIDR"
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Join [ "", [ !Ref Environment, "-Public-A" ] ]
+-
+  PublicSubnetB:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 0, "Fn::GetAZs": { Ref: "AWS::Region" } ]
+      CidrBlock: !Ref "PublicSubnetBCIDR"
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Join [ "", [ !Ref Environment, "-Public-B" ] ]
+-
+  PrivateSubnetA:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 0, "Fn::GetAZs": { Ref: "AWS::Region" } ]
+      CidrBlock: !Ref "PublicSubnetACIDR"
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Join [ "", [ !Ref Environment, "-Private-A" ] ]
+-
+  PrivateSubnetB:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 0, "Fn::GetAZs": { Ref: "AWS::Region" } ]
+      CidrBlock: !Ref "PublicSubnetBCIDR"
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Join [ "", [ !Ref Environment, "-Private-B" ] ]
+-
+  DatabaseSubnetA:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 0, "Fn::GetAZs": { Ref: "AWS::Region" } ]
+      CidrBlock: !Ref "DatabaseSubnetACIDR"
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Join [ "", [ !Ref Environment, "-Database-A" ] ]
+-
+  DatabaseSubnetB:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 0, "Fn::GetAZs": { Ref: "AWS::Region" } ]
+      CidrBlock: !Ref "DatabaseSubnetBCIDR"
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Join [ "", [ !Ref Environment, "-Database-B" ] ]
+          
 -
