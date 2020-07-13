@@ -316,8 +316,8 @@ Resources:
           Value: !Join [ "", [ !Ref Environment, "-Database-B" ] ]
 
 -
-#============== Ouyputs =================
-Ouyputs:
+#============== Outputs =================
+Outputs:
   VPC:
     Description: ID for the VPC
     Value: !Ref VPC
