@@ -89,14 +89,14 @@ Resources:
 
 #====== Internet Gateway =======
   GatewayInternet:
-    Type: "AWS::EC2::InternetGateway"
+    Type: AWS::EC2::InternetGateway
     Properties:
       Tags:
         - Key: Name
           Value: !Ref Environment
 
   GatewayAttachmentInternet:                       # Attachment IGW to VPC
-    Type: "AWS::EC2::VPCGatewayAttachment"
+    Type: AWS::EC2::VPCGatewayAttachment
     Properties:
       VpcId:  !Ref VPC
       InternetGatewayId: !Ref GatewayInternet
@@ -104,7 +104,7 @@ Resources:
 
 #====== Public RouteTables =========
   RouteTableForPublicSubnet:                       # Creation of Empty Route Table
-    Type: "AWS::EC2::RouteTable"
+    Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref VPC
       Tags:
@@ -113,7 +113,7 @@ Resources:
 
 
   RoutesForPublicRouteTable:                     # Creation and Attachment of Routes for Route Table
-    Type: "AWS::EC2::Route"
+    Type: AWS::EC2::Route
     DependsOn: GatewayAttachmentInternet
     Properties:
       DestinationCidrBlock: 0.0.0.0/0
@@ -123,7 +123,7 @@ Resources:
 
 #====== Private RouteTables ===========
   RouteTableForPrivateSubnetA:
-    Type: "AWS::EC2::RouteTable"
+    Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref VPC
       Tags:
@@ -131,7 +131,7 @@ Resources:
           Value: !Join [ " ", [ !Ref Environment, "PrivateRouteTableA" ] ]
 
   RouteTableForPrivateSubnetB:
-    Type: "AWS::EC2::RouteTable"
+    Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref VPC
       Tags:
@@ -158,13 +158,13 @@ Resources:
 
 #====== Associate Public Route for Public Subnets
   RouteAssociationPublicA:
-    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       RouteTableId: !Ref RouteTableForPublicSubnet
       SubnetId: !Ref PublicSubnetA
 
   RouteAssociationPublicB:
-    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       RouteTableId: !Ref RouteTableForPublicSubnet
       SubnetId: !Ref PublicSubnetB
@@ -172,20 +172,20 @@ Resources:
 
 #===== Associate Private Route for Private Subnets
   RouteAssociationPrivateA:
-    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       RouteTableId: !Ref RouteTableForPrivateSubnetA
       SubnetId: !Ref PrivateSubnetA
 
   RouteAssociationPrivateB:
-    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       RouteTableId: !Ref RouteTableForPrivateSubnetB
       SubnetId: !Ref PrivateSubnetB
 
 #==== Route Table and Route Association for Internal only - Databases
   RouteTableForDatabase:
-    Type: "AWS::EC2::RouteTable"
+    Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref VPC
       Tags:
@@ -193,13 +193,13 @@ Resources:
           Value: !Join [ " ", [ !Ref Environment, "DatabaseRouteTable" ] ]
 
   RouteAssociationDatabaseA:
-    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       RouteTableId: !Ref RouteTableForDatabase
       SubnetId: !Ref DatabaseSubnetA
 
   RouteAssociationDatabaseB:
-    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       RouteTableId: !Ref RouteTableForDatabase
       SubnetId: !Ref DatabaseSubnetB
@@ -207,13 +207,13 @@ Resources:
 
  #======= ElasticIP for NAT Gateways ======
   EIP1:
-    Type: "AWS::EC2::EIP"
+    Type: AWS::EC2::EIP
     DependsOn : GatewayAttachmentInternet
     Properties:
       Domain: !Ref VPC
 
   EIP2:
-    Type: "AWS::EC2::EIP"
+    Type: AWS::EC2::EIP
     DependsOn : GatewayAttachmentInternet
     Properties:
       Domain: !Ref VPC
@@ -242,7 +242,7 @@ Resources:
 
 #============ ALL Subnets ====================
   PublicSubnetA:
-    Type: "AWS::EC2::Subnet"
+    Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
       AvailabilityZone: !Select [ 0, "Fn::GetAZs": { Ref: "AWS::Region" } ]
@@ -253,7 +253,7 @@ Resources:
           Value: !Join [ "", [ !Ref Environment, "-Public-A" ] ]
 
   PublicSubnetB:
-    Type: "AWS::EC2::Subnet"
+    Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
       AvailabilityZone: !Select [ 1, "Fn::GetAZs": { Ref: "AWS::Region" } ]
@@ -264,7 +264,7 @@ Resources:
           Value: !Join [ "", [ !Ref Environment, "-Public-B" ] ]
 
   PrivateSubnetA:
-    Type: "AWS::EC2::Subnet"
+    Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
       AvailabilityZone: !Select [ 0, "Fn::GetAZs": { Ref: "AWS::Region" } ]
@@ -275,7 +275,7 @@ Resources:
           Value: !Join [ "", [ !Ref Environment, "-Private-A" ] ]
 
   PrivateSubnetB:
-    Type: "AWS::EC2::Subnet"
+    Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
       AvailabilityZone: !Select [ 1, "Fn::GetAZs": { Ref: "AWS::Region" } ]
@@ -286,7 +286,7 @@ Resources:
           Value: !Join [ "", [ !Ref Environment, "-Private-B" ] ]
 
   DatabaseSubnetA:
-    Type: "AWS::EC2::Subnet"
+    Type: AWS::EC2::Subnet
     DependsOn: VPCCidrBlock2
     Properties:
       VpcId: !Ref VPC
@@ -298,7 +298,7 @@ Resources:
           Value: !Join [ "", [ !Ref Environment, "-Database-A" ] ]
 
   DatabaseSubnetB:
-    Type: "AWS::EC2::Subnet"
+    Type: AWS::EC2::Subnet
     DependsOn: VPCCidrBlock2
     Properties:
       VpcId: !Ref VPC
