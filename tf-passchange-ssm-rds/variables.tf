@@ -14,6 +14,11 @@ variable "special" {
   default = "!#$&%"
 }
 
+variable "keeper" {
+  description = "Change to reset password"
+  default = "keeper"
+}
+
 # aws_ssm_parameter
 variable "pass_name" {
   default = "/prod/mysql"
