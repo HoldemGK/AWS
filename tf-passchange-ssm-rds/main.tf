@@ -6,6 +6,9 @@ resource "random_string" "rds_password" {
   length = var.length
   special = true
   override_special = var.special
+  keepers = {
+    keeper1 = var.keeper
+  }
 }
 
 resource "aws_ssm_parameter" "rds_password" {
