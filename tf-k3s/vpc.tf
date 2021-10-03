@@ -1,10 +1,9 @@
-data "aws_subnet_ids" "subnet_ids" {
-  vpc_id = var.ap_vpc_id
+data "aws_availability_zones" "available" {
+  state = "available"
 }
 
-data "aws_subnet" "subnets" {
-  for_each = data.aws_subnet_ids.subnet_ids.ids
-  id    = each.value
+resource "aws_default_subnet" "ap_subnet" {
+  availability_zone = data.aws_availability_zones.available.names[0]
 }
 
 # Security bastion
