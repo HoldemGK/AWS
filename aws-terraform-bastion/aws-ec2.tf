@@ -1,6 +1,6 @@
 resource "aws_launch_configuration" "bastion_1c" {
   associate_public_ip_address = true
-  image_id                    = "ami-010fae13a16763bb4"
+  image_id                    = var.image_id
   iam_instance_profile        = aws_iam_instance_profile.bastion-node.name
   instance_type               = var.instance_type
   name_prefix                 = "bastion"

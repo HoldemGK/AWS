@@ -23,6 +23,11 @@ variable "env_name" {
   default = "Bastion"
 }
 
+variable "image_id" {
+  description = "ID of image AMI"
+  default = "ami-010fae13a16763bb4"
+}
+
 variable "tags_ec2" {
   description = "List of maps of tags that will be applied to the Auto Scaling group for Bastion node"
   default = [
