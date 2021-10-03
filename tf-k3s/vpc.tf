@@ -1,5 +1,5 @@
 data "aws_subnet_ids" "subnet_ids" {
-  vpc_id = var.vpc_id
+  vpc_id = var.ap_vpc_id
 }
 
 data "aws_subnet" "subnets" {
@@ -26,6 +26,5 @@ resource "aws_security_group" "bastion" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(tomap({"Name" = "${var.env_name} Security Group"}),
-  var.tags_all)
+  tags = tomap({"Name" = "${var.env_name} Security Group"})
 }
