@@ -16,6 +16,6 @@ resource "aws_security_group" "bastion" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(map("Name", "${var.env_name} Security Group"),
+  tags = merge(tomap({"Name" = "${var.env_name} Security Group"}),
   var.tags_all)
 }
