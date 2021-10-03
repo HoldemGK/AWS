@@ -25,9 +25,9 @@ resource "aws_autoscaling_group" "bastion_asg" {
   name                 = var.env_name
   vpc_zone_identifier  = [for s in data.aws_subnet.subnets : s.cidr_block]
   tags = concat(var.tags_ec2,
-    list(
+    tolist([
       tomap({"key" = "Name",
         "value" = var.env_name,
       "propagate_at_launch" = "true"})
-    ))
+    ]))
 }
