@@ -9,6 +9,6 @@ variable "file_text" {
 variable "tags" {
   default = {
     Owner = "GK"
-    Env   = "dev"
+    Env   = "prod"
   }
 }

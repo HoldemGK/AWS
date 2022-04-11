@@ -2,7 +2,7 @@ data "terraform_remote_state" "s3" {
   backend = "s3"
   config = {
     bucket = "terraform-backend-gk"
-    key    = "dev/s3/terraform.tfstate"
+    key    = "prod/s3/terraform.tfstate"
     region = "eu-north-1"
   }
 }

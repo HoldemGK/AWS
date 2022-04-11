@@ -4,7 +4,7 @@ variable "bucket_name" {
 
 variable "tags" {
   default = {
-      Owner = "GK"
-      Env = "prod"
+    Owner = "GK"
+    Env   = "prod"
   }
 }
