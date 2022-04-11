@@ -8,7 +8,7 @@ remote_state {
     config = {
         bucket = "terragrunt-backend-gk"
         region = "eu-north-1"
-        key = "${path_relative_to_include}/terraform.tfstate"
+        key = "${path_relative_to_include()}/terraform.tfstate"
         encrypt = true
     }
 }
@@ -36,7 +36,7 @@ EOF
 
 # Load variables
 terraform {
-    extra_erguments "common_vars" {
+    extra_arguments "common_vars" {
         commands = get_terraform_commands_that_need_vars()
         required_var_files = [
             find_in_parent_folders("common.tfvars")
