@@ -33,6 +33,10 @@ variable "worker_instance_count" {
   default     = 1
 }
 
+variable "subnet_id" {
+  type        = string
+}
+
 # variable "ami_id" {
 #   description = "AMI ID for the instances."
 #   type        = string

@@ -31,7 +31,7 @@ module "ec2_master" {
   instance_type          = var.master_type
   key_name               = var.key_name
   vpc_security_group_ids = ["sg-02357d42543ee294d"]
-  subnet_id              = data.aws_subnet_ids.default.subnet_ids[0]
+  subnet_id              = var.subnet_id
   ami                    = data.aws_ami.ubuntu.id
 
   tags = {
