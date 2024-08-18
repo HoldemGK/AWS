@@ -37,6 +37,11 @@ variable "subnet_id" {
   type        = string
 }
 
+variable "master_volume_size_root" {
+  type = number
+  default = 30
+}
+
 # variable "ami_id" {
 #   description = "AMI ID for the instances."
 #   type        = string

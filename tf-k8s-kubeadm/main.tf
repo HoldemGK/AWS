@@ -28,10 +28,10 @@ module "ec2_master" {
   subnet_id              = var.subnet_id
   ami                    = data.aws_ami.ubuntu.id
 
-  root_block_device = {
+  root_block_device = [{
         delete_on_termination = true
-        volume_size           = 30
-  }
+        volume_size           = var.master_volume_size_root
+  }]
 
   vpc_security_group_ids = ["sg-02357d42543ee294d"]
 
