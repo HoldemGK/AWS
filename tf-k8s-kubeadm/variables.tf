@@ -1,3 +1,8 @@
+variable "prefix" {
+  type        = string
+  default     = "k8s"
+}
+
 variable "region" {
   description = "The AWS region where resources will be created."
   type        = string
