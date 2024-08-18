@@ -33,7 +33,7 @@ variable "worker_instance_count" {
   default     = 1
 }
 
-variable "vpc_id" { #172.31.0.0/16
+variable "vpc_id" { # "172.31.0.0/16"
   type = string
 }
 

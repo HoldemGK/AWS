@@ -27,4 +27,16 @@ locals {
         volume_size           = var.worker_volume_size_root
       }
     }, ]
+
+  # SG Rules Config
+  rules = {
+    "ssh"          = ["22", "22", "tcp", "SSH access"]
+    "kube_api"     = ["6443", "6443", "tcp", "Kubernetes API"]
+    "kubelet"      = ["10250", "10250", "tcp", "Kubelet API"]
+    "nodeport"     = ["30000", "32767", "tcp", "Kubernetes NodePort"]
+  }
+
+  bastion_ingress_rules = ["ssh"]
+  master_ingress_rules  = ["ssh", "kube_api"]
+  worker_ingress_rules  = ["ssh", "kubelet", "nodeport"]
 }
