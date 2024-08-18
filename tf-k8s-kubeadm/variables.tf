@@ -1,6 +1,6 @@
 variable "prefix" {
-  type        = string
-  default     = "k8s"
+  type    = string
+  default = "k8s"
 }
 
 variable "region" {
@@ -34,11 +34,11 @@ variable "worker_instance_count" {
 }
 
 variable "subnet_id" {
-  type        = string
+  type = string
 }
 
 variable "master_volume_size_root" {
-  type = number
+  type    = number
   default = 30
 }
 

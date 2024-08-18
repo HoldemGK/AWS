@@ -20,17 +20,17 @@ data "aws_ami" "ubuntu" {
 }
 
 module "ec2_master" {
-  source  = "terraform-aws-modules/ec2-instance/aws"
+  source = "terraform-aws-modules/ec2-instance/aws"
 
-  name = local.master_name
-  instance_type          = var.master_type
-  key_name               = var.key_name
-  subnet_id              = var.subnet_id
-  ami                    = data.aws_ami.ubuntu.id
+  name          = local.master_name
+  instance_type = var.master_type
+  key_name      = var.key_name
+  subnet_id     = var.subnet_id
+  ami           = data.aws_ami.ubuntu.id
 
   root_block_device = [{
-        delete_on_termination = true
-        volume_size           = var.master_volume_size_root
+    delete_on_termination = true
+    volume_size           = var.master_volume_size_root
   }]
 
   vpc_security_group_ids = ["sg-02357d42543ee294d"]
