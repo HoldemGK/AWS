@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "us-west-2" # Replace with your desired region
-}
-
 module "bastion_sg" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "4.0.0"
