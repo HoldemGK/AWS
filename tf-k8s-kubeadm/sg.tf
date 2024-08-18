@@ -50,8 +50,8 @@ resource "aws_security_group_rule" "master_allow_worker" {
   from_port                = 6443
   to_port                  = 6443
   protocol                 = "tcp"
-  security_group_id        = module.k8s_master_sg.this_security_group_id
-  source_security_group_id = module.k8s_worker_sg.this_security_group_id
+  security_group_id        = module.k8s_master_sg.security_group_id
+  source_security_group_id = module.k8s_worker_sg.security_group_id
   description              = "Allow Kubernetes API server traffic from workers"
 }
 
@@ -60,8 +60,8 @@ resource "aws_security_group_rule" "worker_allow_master" {
   from_port                = 10250
   to_port                  = 10250
   protocol                 = "tcp"
-  security_group_id        = module.k8s_worker_sg.this_security_group_id
-  source_security_group_id = module.k8s_master_sg.this_security_group_id
+  security_group_id        = module.k8s_worker_sg.security_group_id
+  source_security_group_id = module.k8s_master_sg.security_group_id
   description              = "Allow kubelet API traffic from master"
 }
 
@@ -70,7 +70,8 @@ resource "aws_security_group_rule" "worker_allow_nodeport" {
   from_port                = 30000
   to_port                  = 32767
   protocol                 = "tcp"
-  security_group_id        = module.k8s_worker_sg.this_security_group_id
-  source_security_group_id = module.k8s_master_sg.this_security_group_id
+  security_group_id        = module.k8s_worker_sg.security_group_id
+  source_security_group_id = module.k8s_master_sg.security_group_id
   description              = "Allow Kubernetes NodePort traffic"
 }
+
