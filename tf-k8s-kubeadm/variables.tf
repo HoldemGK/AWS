@@ -33,21 +33,11 @@ variable "worker_instance_count" {
   default     = 1
 }
 
-variable "ami_id" {
-  description = "AMI ID for the instances."
-  type        = string
-  default     = "ami-07c8c1b18ca66bb07"  # Example AMI ID; replace with your preferred AMI.
-}
-
-variable "vpc_id" {
-  description = "VPC ID where instances will be launched."
-  type        = string
-}
-
-variable "subnet_id" {
-  description = "Subnet ID where instances will be launched."
-  type        = string
-}
+# variable "ami_id" {
+#   description = "AMI ID for the instances."
+#   type        = string
+#   default     = "ami-07c8c1b18ca66bb07"  # Example AMI ID; replace with your preferred AMI.
+# }
 
 variable "key_name" {
   description = "The name of the key pair to use for the instances."
