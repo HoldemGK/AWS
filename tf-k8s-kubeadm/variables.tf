@@ -33,6 +33,10 @@ variable "worker_instance_count" {
   default     = 1
 }
 
+variable "vpc_id" {
+  type = string
+}
+
 variable "subnet_id" {
   type = string
 }

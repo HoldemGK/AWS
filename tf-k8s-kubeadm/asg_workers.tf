@@ -24,6 +24,7 @@ module "asg" {
 
   image_id          = data.aws_ami.ubuntu.id
   instance_type     = var.worker_type
+  key_name          = var.key_name
 
   block_device_mappings = local.worker_block_device_mappings
 
