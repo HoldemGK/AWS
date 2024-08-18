@@ -3,7 +3,7 @@ data "aws_ami" "ubuntu" {
   owners      = ["099720109477"]
   filter {
     name   = "name"
-    values = ["ubuntu-*-24.04"]
+    values = ["*-24.04"]
   }
   filter {
     name   = "virtualization-type"
