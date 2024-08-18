@@ -19,10 +19,6 @@ data "aws_ami" "ubuntu" {
   }
 }
 
-data "aws_subnet_ids" "default" {
-  vpc_id = var.vpc_id
-}
-
 module "ec2_master" {
   source  = "terraform-aws-modules/ec2-instance/aws"
 
