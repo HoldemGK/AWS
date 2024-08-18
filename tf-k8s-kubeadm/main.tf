@@ -33,7 +33,8 @@ module "ec2_master" {
     volume_size           = var.master_volume_size_root
   }]
 
-  vpc_security_group_ids = ["sg-02357d42543ee294d"]
+  vpc_security_group_ids      = ["sg-02357d42543ee294d"]
+  associate_public_ip_address = false
 
   tags = {
     Name = local.master_name

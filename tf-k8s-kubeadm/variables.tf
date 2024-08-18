@@ -52,3 +52,34 @@ variable "key_name" {
   description = "The name of the key pair to use for the instances."
   type        = string
 }
+
+# Autoscalling group Workers
+variable "min_size" {
+  type = number
+  default = 0
+}
+
+variable "max_size" {
+  type = number
+  default = 5
+}
+
+variable "desired_capacity" {
+  type = number
+  default = 1
+}
+
+variable "wait_for_capacity_timeout" {
+  type = number
+  default = 0
+}
+
+variable "health_check_type" {
+  type = string
+  default = "EC2"
+}
+
+variable "worker_volume_size_root" {
+  type    = number
+  default = 50
+}
