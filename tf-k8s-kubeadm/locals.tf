@@ -34,9 +34,14 @@ locals {
     "kube_api"     = ["6443", "6443", "tcp", "Kubernetes API"]
     "kubelet"      = ["10250", "10250", "tcp", "Kubelet API"]
     "nodeport"     = ["30000", "32767", "tcp", "Kubernetes NodePort"]
+    "all-egress"   = ["0", "0", "-1", "Allow all egress"]
   }
 
   bastion_ingress_rules = ["ssh"]
   master_ingress_rules  = ["ssh", "kube_api"]
   worker_ingress_rules  = ["ssh", "kubelet", "nodeport"]
+
+  bastion_egress_rules = ["all-egress"]
+  master_egress_rules  = ["all-egress"]
+  worker_egress_rules  = ["all-egress"]
 }
