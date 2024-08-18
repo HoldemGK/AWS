@@ -20,6 +20,8 @@ locals {
   worker_block_device_mappings = [
     {
       # Root volume
+      device_name = "/dev/xvda"
+      no_device   = 0
       ebs = {
         delete_on_termination = true
         volume_size           = var.worker_volume_size_root
