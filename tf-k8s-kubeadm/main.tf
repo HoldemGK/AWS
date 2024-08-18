@@ -3,7 +3,7 @@ data "aws_ami" "ubuntu" {
   owners      = ["amazon"]
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-24.04-amd64-server-*"]
+    values = ["ubuntu-*-24.04"]
   }
   filter {
     name   = "virtualization-type"
