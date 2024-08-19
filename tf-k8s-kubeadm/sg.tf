@@ -42,5 +42,5 @@ module "k8s_worker_sg" {
   egress_rules  = local.worker_egress_rules
 
   egress_cidr_blocks = ["0.0.0.0/0"]
-  rules              = local.rules
+  #rules              = local.rules
 }
