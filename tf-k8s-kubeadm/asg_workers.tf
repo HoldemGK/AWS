@@ -11,7 +11,7 @@ module "asg" {
   wait_for_capacity_timeout = var.wait_for_capacity_timeout
   health_check_type         = var.health_check_type
   vpc_zone_identifier       = local.vpc_zone_identifier
-  #security_groups           = []
+  security_groups           = [module.k8s_worker_sg.security_group_id]
 
   instance_refresh = {
     strategy    = local.refresh_strategy
