@@ -30,15 +30,15 @@ module "k8s_master_sg" {
   rules              = local.rules
 }
 
-module "k8s_worker_sg" {
-  source  = "terraform-aws-modules/security-group/aws"
-  version = "5.1.2"
+# module "k8s_worker_sg" {
+#   source  = "terraform-aws-modules/security-group/aws"
+#   version = "5.1.2"
 
-  name        = "k8s-worker-sg"
-  description = "Security group for Kubernetes Worker nodes"
-  vpc_id      = var.vpc_id
+#   name        = "k8s-worker-sg"
+#   description = "Security group for Kubernetes Worker nodes"
+#   vpc_id      = var.vpc_id
 
-  ingress_cidr_blocks = ["172.31.0.0/16"]
-  ingress_rules       = ["all-icmp", "ssh-tcp", "kubernetes-api"]
-  egress_rules        = ["all-all"]
-}
+#   ingress_cidr_blocks = ["172.31.0.0/16"]
+#   ingress_rules       = ["all-icmp", "ssh-tcp", "kubernetes-api"]
+#   egress_rules        = ["all-all"]
+# }
