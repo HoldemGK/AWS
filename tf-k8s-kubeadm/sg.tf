@@ -38,7 +38,7 @@ module "k8s_worker_sg" {
   description = "Security group for Kubernetes Worker nodes"
   vpc_id      = var.vpc_id
 
-  ingress_rules = "kubernetes-api"
+  ingress_rules = ["kubernetes-api"]
   egress_rules  = local.worker_egress_rules
 
   egress_cidr_blocks = ["0.0.0.0/0"]
