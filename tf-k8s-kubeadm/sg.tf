@@ -38,7 +38,23 @@ module "k8s_worker_sg" {
   description = "Security group for Kubernetes Worker nodes"
   vpc_id      = var.vpc_id
 
-  ingress_cidr_blocks = ["172.31.0.0/16"]
-  ingress_rules       = ["all-icmp", "ssh-tcp", "kubernetes-api"]
-  egress_rules        = ["all-all"]
+  ingress_with_cidr_blocks = [
+    {
+      rule        = "all-icmp"
+      cidr_blocks = ["172.31.0.0/16"]
+    },
+    {
+      rule        = "ssh-tcp"
+      cidr_blocks = ["172.31.0.0/16"]
+    },
+    {
+      from_port   = 6443
+      to_port     = 6443
+      protocol    = "tcp"
+      description = "Kubernetes API"
+      cidr_blocks = ["172.31.0.0/16"]
+    }
+  ]
+
+  egress_rules = ["all-all"]
 }
