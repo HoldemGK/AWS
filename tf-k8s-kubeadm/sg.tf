@@ -89,3 +89,22 @@ resource "aws_vpc_security_group_ingress_rule" "worker_node_ports" {
   ip_protocol = "tcp"
   to_port     = 32767
 }
+
+# SSH Inside VPC
+resource "aws_security_group" "vpc_ssh" {
+  name        = "vpc-ssh-ingress"
+  description = "Security group for SSH Inside VPC"
+  vpc_id      = var.vpc_id
+  tags = {
+    Name = "vpc-ssh-ingress"
+  }
+}
+
+resource "aws_vpc_security_group_ingress_rule" "vpc_ssh" {
+  security_group_id = aws_security_group.vpc_ssh.id
+
+  cidr_ipv4   = var.vpc_cidr
+  from_port   = 22
+  ip_protocol = "tcp"
+  to_port     = 22
+}
