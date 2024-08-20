@@ -1,63 +1,91 @@
-# module "bastion_sg" {
-#   source  = "terraform-aws-modules/security-group/aws"
-#   version = "5.1.2"
+# Master SG
+resource "aws_security_group" "master" {
+  name        = "master-ingress"
+  description = "Security group for Kubernetes Master nodes"
+  vpc_id      = var.vpc_id
+  tags = {
+    Name = "master-ingress"
+  }
+}
 
-#   name        = "bastion-sg"
-#   description = "Security group for Bastion host"
-#   vpc_id      = var.vpc_id
+resource "aws_vpc_security_group_ingress_rule" "master_api" {
+  security_group_id = aws_security_group.master.id
 
-#   ingress_cidr_blocks = ["172.31.0.0/16"]
-#   ingress_rules       = local.bastion_ingress_rules
+  cidr_ipv4   = var.vpc_cidr
+  from_port   = 6443
+  ip_protocol = "tcp"
+  to_port     = 6443
+}
 
-#   egress_rules        = local.bastion_egress_rules
-#   egress_cidr_blocks  = ["0.0.0.0/0"]
+resource "aws_vpc_security_group_ingress_rule" "master_etcd" {
+  security_group_id = aws_security_group.master.id
 
-#   rules = local.rules
-# }
+  cidr_ipv4   = var.vpc_cidr
+  from_port   = 2379
+  ip_protocol = "tcp"
+  to_port     = 2380
+}
 
-# module "k8s_master_sg" {
-#   source  = "terraform-aws-modules/security-group/aws"
-#   version = "5.1.2"
+resource "aws_vpc_security_group_ingress_rule" "master_kubelet" {
+  security_group_id = aws_security_group.master.id
 
-#   name        = "k8s-master-sg"
-#   description = "Security group for Kubernetes Master nodes"
-#   vpc_id      = var.vpc_id
+  cidr_ipv4   = var.vpc_cidr
+  from_port   = 10250
+  ip_protocol = "tcp"
+  to_port     = 10250
+}
 
-#   ingress_rules = local.master_ingress_rules
-#   egress_rules  = local.master_egress_rules
+resource "aws_vpc_security_group_ingress_rule" "master_scheduler" {
+  security_group_id = aws_security_group.master.id
 
-#   egress_cidr_blocks = ["0.0.0.0/0"]
-#   rules              = local.rules
-# }
+  cidr_ipv4   = var.vpc_cidr
+  from_port   = 10259
+  ip_protocol = "tcp"
+  to_port     = 10259
+}
 
-module "k8s_worker_sg" {
-  source  = "terraform-aws-modules/security-group/aws"
-  version = "5.1.2"
+resource "aws_vpc_security_group_ingress_rule" "master_cm" {
+  security_group_id = aws_security_group.master.id
 
-  name        = "k8s-worker-sg"
+  cidr_ipv4   = var.vpc_cidr
+  from_port   = 10257
+  ip_protocol = "tcp"
+  to_port     = 10257
+}
+
+# Worker SG
+resource "aws_security_group" "worker" {
+  name        = "worker-ingress"
   description = "Security group for Kubernetes Worker nodes"
   vpc_id      = var.vpc_id
+  tags = {
+    Name = "worker-ingress"
+  }
+}
 
-  ingress_with_cidr_blocks = [
-    {
-      cidr_blocks = ["172.31.0.0/16"]
-      rule        = "all-icmp"
-      cidr_blocks = ["172.31.0.0/16"]
-    },
-    {
-      cidr_blocks = ["172.31.0.0/16"]
-      rule        = "ssh-tcp"
-      cidr_blocks = ["172.31.0.0/16"]
-    },
-    {
-      cidr_blocks = ["172.31.0.0/16"]
-      from_port   = 6443
-      to_port     = 6443
-      protocol    = "tcp"
-      description = "Kubernetes API"
-      
-    }
-  ]
+resource "aws_vpc_security_group_ingress_rule" "worker_kubelet" {
+  security_group_id = aws_security_group.worker.id
 
-  egress_rules = ["all-all"]
+  cidr_ipv4   = var.vpc_cidr
+  from_port   = 10250
+  ip_protocol = "tcp"
+  to_port     = 10250
+}
+
+resource "aws_vpc_security_group_ingress_rule" "worker_kubeproxy" {
+  security_group_id = aws_security_group.worker.id
+
+  cidr_ipv4   = var.vpc_cidr
+  from_port   = 10256
+  ip_protocol = "tcp"
+  to_port     = 10256
+}
+
+resource "aws_vpc_security_group_ingress_rule" "worker_node_ports" {
+  security_group_id = aws_security_group.worker.id
+
+  cidr_ipv4   = var.vpc_cidr
+  from_port   = 30000
+  ip_protocol = "tcp"
+  to_port     = 32767
 }
