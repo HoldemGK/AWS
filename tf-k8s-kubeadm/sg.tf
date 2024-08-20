@@ -40,19 +40,22 @@ module "k8s_worker_sg" {
 
   ingress_with_cidr_blocks = [
     {
+      cidr_blocks = ["172.31.0.0/16"]
       rule        = "all-icmp"
       cidr_blocks = ["172.31.0.0/16"]
     },
     {
+      cidr_blocks = ["172.31.0.0/16"]
       rule        = "ssh-tcp"
       cidr_blocks = ["172.31.0.0/16"]
     },
     {
+      cidr_blocks = ["172.31.0.0/16"]
       from_port   = 6443
       to_port     = 6443
       protocol    = "tcp"
       description = "Kubernetes API"
-      cidr_blocks = ["172.31.0.0/16"]
+      
     }
   ]
 
