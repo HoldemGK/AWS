@@ -2,4 +2,4 @@
 plugin: amazon.aws.aws_ec2
 aws_profile: default
 regions:
-  - eu-north-1
+  - "eu-north-1"
