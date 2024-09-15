@@ -5,6 +5,6 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "terraform-backend-gk"
-    key    = "prod/terraform.tfstate"
+    key    = "prod/k8s.tfstate"
   }
 }
