@@ -14,7 +14,7 @@ module "prometheus_server" {
   }]
 
   vpc_security_group_ids      = [aws_security_group.prometheus_server.id, aws_security_group.vpc_ssh.id]
-  associate_public_ip_address = false
+  associate_public_ip_address = true
 
   tags = {
     Name = local.prometheus_name
