@@ -28,6 +28,8 @@ locals {
       }
     }, ]
 
+  start_script_path = "../scripts/install_pm_node_exporter.sh"
+
   # SG Rules Config
   rules = {
     "ssh"          = ["22", "22", "tcp", "SSH access"]

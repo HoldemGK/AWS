@@ -27,6 +27,7 @@ module "ec2_master" {
   key_name      = var.key_name
   subnet_id     = var.subnet_id
   ami           = data.aws_ami.ubuntu.id
+  user_data     = local.start_script_path
 
   root_block_device = [{
     delete_on_termination = true
