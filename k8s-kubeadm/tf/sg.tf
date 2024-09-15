@@ -108,3 +108,12 @@ resource "aws_vpc_security_group_ingress_rule" "vpc_ssh" {
   ip_protocol = "tcp"
   to_port     = 22
 }
+
+resource "aws_vpc_security_group_egress_rule" "vpc_out" {
+  security_group_id = aws_security_group.vpc_ssh.id
+
+  cidr_ipv4   = "0.0.0.0/0"
+  from_port   = 0
+  to_port     = 0
+  ip_protocol = "-1"
+}
