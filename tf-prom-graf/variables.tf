@@ -15,7 +15,7 @@ variable "pm_type" {
   default     = "t3.medium"
 }
 
-variable "graf_type" {
+variable "grf_type" {
   description = "Instance type for Grafana Server"
   type        = string
   default     = "t3.micro"
@@ -32,4 +32,19 @@ variable "vpc_cidr" {
 
 variable "subnet_id" {
   type = string
+}
+
+variable "pm_volume_size_root" {
+  type    = number
+  default = 50
+}
+
+variable "grf_volume_size_root" {
+  type    = number
+  default = 30
+}
+
+variable "key_name" {
+  description = "The name of the key pair to use for the instances."
+  type        = string
 }
