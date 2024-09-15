@@ -13,7 +13,7 @@ module "prometheus_server" {
     volume_size           = var.pm_volume_size_root
   }]
 
-  vpc_security_group_ids      = [aws_security_group.master.id, aws_security_group.vpc_ssh.id]
+  vpc_security_group_ids      = [aws_security_group.prometheus_server.id, aws_security_group.vpc_ssh.id]
   associate_public_ip_address = false
 
   tags = {
