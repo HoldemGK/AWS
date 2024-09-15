@@ -11,7 +11,7 @@ resource "aws_security_group" "prometheus_server" {
 resource "aws_vpc_security_group_ingress_rule" "pm_srv_ingress" {
   security_group_id = aws_security_group.prometheus_server.id
 
-  cidr_ipv4   = var.vpc_cidr
+  cidr_ipv4   = "0.0.0.0/0"
   from_port   = 9090
   ip_protocol = "tcp"
   to_port     = 9090
